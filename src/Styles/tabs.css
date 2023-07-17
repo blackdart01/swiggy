@@ -1,0 +1,27 @@
+/* tabs */
+
+.tabsPart {
+
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e3e3e3;
+
+}
+
+.leftPart {
+
+    margin-left: 20px;
+    font-weight: 900;
+    font-size: 1.75em;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link {
+    padding: 0;
+}
+
+.nav-item i {
+    margin-left: -10px;
+}
