@@ -2,17 +2,17 @@ import React, { useContext } from 'react'
 import '../Styles/product.css'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { CartContext } from './cartContext'
+import { CartContext } from '../Components/cartContext'
 const Product = (props) => {
 
     const [toggle, setToggle] = useState(true)
-    const { isLoaded,data,restroData,restroCouponData,restroId } = props
+    const { isLoaded, data, restroData,restroCouponData,restroId } = props
     const [cartArr,setCartArr]=useContext(CartContext);
 
     const handleChangeChecked = (event) => {
         setToggle(toggle => !toggle)
     }
-
+    let category = restroData[0].category;
     const addToCart = (imgid, foodname, foodprice) => {
         let myObj={
             imgIdObj:imgid,
@@ -21,6 +21,7 @@ const Product = (props) => {
         };
         let newArr = 
         setCartArr((prevData) => [...prevData, myObj])
+        alert(`${foodname} Added to Cart ,\n ${cartArr.length + 1} items in Cart.`)
     }
     
 
@@ -34,10 +35,11 @@ const Product = (props) => {
                             <p className="restro-title">{data.name}</p>
                             <p className="tags">{data.cuisines}</p>
                             <p className="address">{data.areaName}, {data.sla.lastMileTravelString}</p>
+                            <p className="address">{data.locality}</p>
                         </div>
                         <div className="restroRight">
-                            <p className="rating"><i className="fa-solid fa-star"></i>{data.avgRating}</p>
-                            <p className="review">{data.totalRatingsString}</p>
+                            <p className="rating"><i className="fa-solid fa-star"></i>{data.avgRating || data.avgRatingString}</p>
+                            <p className="review">{data.totalRatingsString || "20+ ratings"}</p>
                         </div>
                     </div>
                     <div className="coupon-testimonial">
@@ -70,7 +72,7 @@ const Product = (props) => {
                     <hr />
                     <div className="menu-list">
                         <div className="menuSection">
-                            <span className="menuHeading">Recommended ({restroData.length}) </span>
+                            <span className="menuHeading">{category} ({restroData.length})</span>
                             {restroData.map(obj => {
                                 if (toggle) {
                                     hasData = true;
@@ -78,16 +80,25 @@ const Product = (props) => {
                                         <>
                                         <div className="menu">
                                             <div className="menuCards">
-                                                <p className="menu-item-title">{obj.card.info.name}</p>
-                                                <p className="price">₹{obj.card.info.price / 100}</p>
-                                                <div className="menu-desc">{obj.card.info.description}</div>
+                                                <p className="menu-item-title">{obj.name}</p>
+                                                <p className="price">₹{(obj.price || obj.defaultPrice) / 100}</p>
+                                                <div className="menu-desc">{obj.description}</div>
                                             </div>
+                                                {obj.imageId?(
                                             <div className="menu-card-img">
-                                                <img src={`https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/${obj.card.info.imageId}`} alt="" />
+                                                <img src={`https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/${obj.imageId}`} alt="" />
                                                     <button className="add-to-cart" onClick={() =>
-                                                        addToCart(obj.card.info.imageId, obj.card.info.name, obj.card.info.price / 100)
+                                                        addToCart(obj.imageId, obj.name, obj.price / 100)
                                                     }>Add</button>
                                             </div>
+                                                    ) : (
+                                                        <div className="menu-card-img">
+                                                            <img alt="No Data"/>
+                                                            <button className="add-to-cart" onClick={() =>
+                                                                addToCart(obj.imageId, obj.name, obj.price / 100)
+                                                            }>Add</button>
+                                                        </div>
+                                                    )}
                                         </div>
                                             <hr/>
                                             </>

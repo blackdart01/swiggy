@@ -5,15 +5,11 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 
 const RestroMenu = () => {
-
-
-
   const [data, setData] = useState(null);
   const [restroData, setRestroData] = useState(null);
   const [restroCouponData, setRestroCouponData] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-
-
+  const [restroResObj, setRestroResObj] = useState([]);
   const [totalOpenRestaurants, setTotalOpenRestaurants] = useState(0)
   const { id } = useParams();
   const getCard = async () => {
@@ -23,19 +19,21 @@ const RestroMenu = () => {
       const response = await fetch(corsProxy + url);
       const jsonData = await response.json();
       const res = jsonData.data.cards[0].card.card.info;
-      let restroRes = jsonData.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards[1].card.card;
-      if (restroRes.categories) {
-        restroRes = jsonData.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards[1].card.card.categories[0].itemCards;
+      let restroRes = jsonData.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards;
+      console.log(restroRes);
+      if (restroRes[1].card.card.categories) {
+        const a = restroRes[1].card.card.categories[0].itemCards;
+        restroRes=a.map(obj=> obj.card.info)
+      }
+      else if (restroRes[1].card.card.carousel) {
+        const a = restroRes[1].card.card.carousel;
+        restroRes=a.map(obj=> obj.dish.info)
       }
       else {
-        let x = jsonData.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards;
-        x.map((obj, index) => { 
-          if (obj.card.card.title == "Recommended"){
-            restroRes = jsonData.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards[index].card.card.itemCards;
-        }})
+        let x = restroRes[1].card.card.itemCards;
+        restroRes = x.map((obj) => obj.card.info)
       }
 
-      // console.log(jsonData.data.cards[2].groupedCard.cardGroupMap.REGULAR);
       const restroCouponRes = jsonData.data.cards[1].card.card.gridElements.infoWithStyle.offers;
       const restroId = jsonData.data.id;
       setData(res);

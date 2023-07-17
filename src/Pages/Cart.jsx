@@ -44,9 +44,7 @@ const Cart = () => {
                 return [...prevObj, newObj];
             }
         })
-        // newObj.count += 1;
-        // setCartCount(prevObj => [...prevObj, newObj]);
-        // console.log(cartCount);
+        console.log(cartCount);
     };
 
     return (
@@ -64,14 +62,17 @@ const Cart = () => {
                                 <div className="left-button">
                                     <button onClick={() => handleDecrement(index)}><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M5 11h14v2H5z"></path></svg></button>
                                 </div>
+                            {cartCount.map((obj, index) => {
                                 <div className="text-text">
-                                    <p className="text">1</p>
+                                    <p className="text">{index}</p>
                                 </div>
+                                }
+                                )}
                                 <div className="right-button">
                                     <button onClick={() => handleIncrement(index)}><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M19 11h-6V5h-2v6H5v2h6v6h2v-6h6z"></path></svg></button>
                                 </div>
                             </div>
-                            <p className="price">₹{obj.foodPriceObj}.00</p>
+                            <p className="price">₹{obj.foodPriceObj}</p>
                         </div>
                     )
                 })}
