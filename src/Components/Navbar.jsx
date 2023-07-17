@@ -1,6 +1,6 @@
 import React from 'react'
-import './index.css'
-import './Styles/Navbar.css'
+import '../index.css'
+import '../Styles/Navbar.css'
 import {Link} from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios';

@@ -1,8 +1,8 @@
 import React from 'react'
-import './Styles/cart.css'
-import Navbar from './Navbar'
+import '../Styles/cart.css'
+import Navbar from '../Components/Navbar'
 import { useContext, useState } from 'react';
-import { CartContext } from './cartContext';
+import { CartContext } from '../Components/cartContext';
 const Cart = () => {
 
     const [cartArr] = useContext(CartContext);
@@ -35,32 +35,18 @@ const Cart = () => {
         setCartCount((prevObj) => {
             const existing = cartCount.find((obj) => obj.index === index);
             if (existing) {
-                let newObj = {
-                    index: index,
-                    count: 1
-                }
-                return prevObj.map((obj) => obj.index === index ? { ...obj, count: obj.count + 1 } : obj)
+                console.log(prevObj.map((obj) => obj.index === index ? { ...obj, count: obj.count + 1 } : obj));
+                return  prevObj.map((obj) => obj.index === index ? { ...obj, count: obj.count + 1 } : obj);
             }
             else{
                 const newObj={index:index,count:1};
+                console.log(newObj);
                 return [...prevObj, newObj];
             }
         })
-        newObj.count += 1;
-        setCartCount(prevObj => [...prevObj, newObj]);
-        console.log(cartCount);
-        // const updatedCart = [...cartCount];
-        // console.log("index", index);
-        // console.log("updated before", updatedCart);
-        // updatedCart[index].foodQuantity += 1;
-        // console.log("updated after",updatedCart);
-        // setItemCount((prevCount) => ({
-        //     ...prevCount,
-        //     [index]: prevCount[index] + 1,
-        // }));
-        // console.log("itemcount",itemCount);
-        // setCartCount(updatedCart);
-        // console.log("cartcount",cartCount);
+        // newObj.count += 1;
+        // setCartCount(prevObj => [...prevObj, newObj]);
+        // console.log(cartCount);
     };
 
     return (
@@ -69,17 +55,17 @@ const Cart = () => {
             <div className="cart">
                 {cartArr.map((obj, index) => {
                     return (
-                        <div className="card">
-                            <div className="card-desc">
+                        <div className="cart-card" key={obj.id}>
+                            <div className="cart-card-desc">
                                 <img src={`https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/${obj.imgIdObj}`} alt="" />
-                                <p className="card-text">{obj.foodNameObj}</p>
+                                <p className="cart-card-text">{obj.foodNameObj}</p>
                             </div>
                             <div className="button">
                                 <div className="left-button">
                                     <button onClick={() => handleDecrement(index)}><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M5 11h14v2H5z"></path></svg></button>
                                 </div>
                                 <div className="text-text">
-                                    <p className="text">{itemCount[index] || 0}</p>
+                                    <p className="text">1</p>
                                 </div>
                                 <div className="right-button">
                                     <button onClick={() => handleIncrement(index)}><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M19 11h-6V5h-2v6H5v2h6v6h2v-6h6z"></path></svg></button>

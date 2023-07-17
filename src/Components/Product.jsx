@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import './Styles/product.css'
+import '../Styles/product.css'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { CartContext } from './cartContext'
@@ -7,30 +7,20 @@ const Product = (props) => {
 
     const [toggle, setToggle] = useState(true)
     const { isLoaded,data,restroData,restroCouponData,restroId } = props
-   console.log(restroData);
-    // let imgIdObj={};
-    // let foodNameObj={};
-    // let foodPriceObj={};
-    
-    // const [cartArr,setCartArr]=useState([]);
     const [cartArr,setCartArr]=useContext(CartContext);
 
     const handleChangeChecked = (event) => {
         setToggle(toggle => !toggle)
     }
-    // console.log(restroData);
 
     const addToCart = (imgid, foodname, foodprice) => {
-        // console.log("hiuighcgu");
         let myObj={
             imgIdObj:imgid,
             foodNameObj:foodname,
             foodPriceObj:foodprice
         };
-        // console.log(myObj);
         let newArr = 
         setCartArr((prevData) => [...prevData, myObj])
-        // console.log(cartArr);
     }
     
 
@@ -43,11 +33,11 @@ const Product = (props) => {
                         <div className="restroLeft">
                             <p className="restro-title">{data.name}</p>
                             <p className="tags">{data.cuisines}</p>
-                            <p className="address">{data.areaName}, 0.6km</p>
+                            <p className="address">{data.areaName}, {data.sla.lastMileTravelString}</p>
                         </div>
                         <div className="restroRight">
                             <p className="rating"><i className="fa-solid fa-star"></i>{data.avgRating}</p>
-                            <p className="review">20+ rating</p>
+                            <p className="review">{data.totalRatingsString}</p>
                         </div>
                     </div>
                     <div className="coupon-testimonial">
@@ -80,10 +70,9 @@ const Product = (props) => {
                     <hr />
                     <div className="menu-list">
                         <div className="menuSection">
-                            <span className="menuHeading">Recommended ({restroData.length})</span>
+                            <span className="menuHeading">Recommended ({restroData.length}) </span>
                             {restroData.map(obj => {
                                 if (toggle) {
-                                    console.log(obj.card.info.isVeg);
                                     hasData = true;
                                     return (
                                         <>
@@ -111,7 +100,7 @@ const Product = (props) => {
                     </div>
                 </div>
             ) : (
-                <div>loading data</div>
+                <div>loading data...</div>
             )}
             {/* <Footer/> */}
         </>

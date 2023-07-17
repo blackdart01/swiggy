@@ -9,26 +9,23 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* background-color: red; */
 
 }
 
-.card {
+.cart-card {
     display: flex;
     flex-direction: row !important;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     margin-bottom: 100vh;
-    /* background-color: green; */
     margin-bottom: 10px;
     padding: 0 10px;
-    /* border: 1px solid rgb(202, 202, 202); */
     border-radius: 5px;
     box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.1);
 }
 
-.card-desc {
+.cart-card-desc {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -38,7 +35,7 @@
     margin-top: 0;
 }
 
-.card-desc img {
+.cart-card-desc img {
     width: 100px;
     height: 100px;
 }
@@ -73,13 +70,11 @@
 
 .left-button:hover {
     background-color: rgb(202, 202, 202);
-    /* border-right: 1px solid black; */
 
 }
 
 .right-button:hover {
     background-color: rgb(202, 202, 202);
-    /* border-left: 1px solid black; */
 
 }
 
@@ -92,7 +87,6 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    /* justify-content: space-between; */
     align-items: center;
 }
 
@@ -135,3 +129,136 @@
 .order button:hover {
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
 }
+
+/*  */
+/* .cart {
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    transform: translateX(-50%);
+    width: 80%;
+    min-height: 100vh !important;
+    margin-bottom: 100vh !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.cart-card {
+    display: flex;
+    flex-direction: row !important;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 100vh;
+    padding: 0 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.1);
+}
+
+.cart-card-desc {
+display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 120px;
+    width: 40%;
+    gap: 10px;
+    margin-top: 0;
+}
+
+.cart-card-desc img {
+    width: 100px;
+    height: 100px;
+}
+
+.cart-card-text {
+    font-size: 1.4em;
+    font-weight: 500;
+}
+
+.button {
+    width: 90px;
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.button button {
+    border: none;
+    width: 29px;
+    height: 38px;
+    background-color: transparent;
+}
+
+.text-text p {
+
+    margin-bottom: 0;
+}
+
+.left-button:hover {
+    background-color: rgb(202, 202, 202);
+
+}
+
+.right-button:hover {
+    background-color: rgb(202, 202, 202);
+
+}
+
+.price {
+    font-size: 1.2em;
+    font-weight: 300;
+}
+
+.receipt {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.subtotal {
+    padding: 10px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 1px solid rgb(202, 202, 202);
+}
+
+.subtotal-text {
+    font-size: 1.2em;
+    padding: 0 20px;
+}
+
+.subtotal-price {
+    padding: 0 20px;
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+.order {
+    position: relative;
+    margin-top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.order button {
+    padding: 10px 24px;
+    background-color: rgb(1, 180, 1);
+    border-radius: 5px;
+    font-weight: 500;
+    border: none;
+    color: white;
+}
+
+.order button:hover {
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.2);
+} */

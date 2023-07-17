@@ -1,6 +1,6 @@
     // import { useEffect, useState } from 'react'
     import React from 'react'
-    import './Styles/cards.css'
+    import '../Styles/cards.css'
     // import Product from './Product'
 import { useNavigate } from 'react-router-dom'
 
@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom'
 
         const navigate = useNavigate();
         function getProduct(id) {
+            console.log("id =========================> ", id, " data ====================> ",data);
+            
             navigate(`/restroMenu/${id}`);
         }
         

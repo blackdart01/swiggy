@@ -3,11 +3,11 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import './App.css'
-import MainPage from './MainPage'
-import RestroMenu from './RestroMenu'
-import Product from './Product'
-import { CartProvider } from './cartContext'
-import Cart from './Cart'
+import MainPage from './Pages/MainPage'
+import RestroMenu from './Pages/RestroMenu'
+import Product from './Components/Product'
+import { CartProvider } from './Components/cartContext'
+import Cart from './Pages/Cart'
 
 
 
