@@ -41,8 +41,9 @@
 }
 
 .cart-card-text {
-    font-size: 1.4em;
+    font-size: 1em;
     font-weight: 500;
+    margin-bottom: 0;
 }
 
 .button {

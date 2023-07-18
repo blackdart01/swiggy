@@ -11,11 +11,12 @@
 
 .card-desc {
     font-weight: 300;
-    font-size: 0.85em;
+    font-size: 0.75em;
     margin-top: -7px;
     display: flex;
     text-align: left;
     flex-direction: row;
+    color:rgb(144, 144, 144)
 }
 
 .card-body{

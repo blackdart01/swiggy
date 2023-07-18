@@ -19,11 +19,11 @@ const Product = (props) => {
             foodNameObj:foodname,
             foodPriceObj:foodprice
         };
+        
         let newArr = 
         setCartArr((prevData) => [...prevData, myObj])
         alert(`${foodname} Added to Cart ,\n ${cartArr.length + 1} items in Cart.`)
     }
-    
 
   let hasData = false;
     return (
@@ -87,7 +87,7 @@ const Product = (props) => {
                                                 {obj.imageId?(
                                             <div className="menu-card-img">
                                                 <img src={`https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/${obj.imageId}`} alt="" />
-                                                    <button className="add-to-cart" onClick={() =>
+                                                        <button className="add-to-cart" data-bs-toggle="modal" data-bs-target="#myModal" onClick={() =>
                                                         addToCart(obj.imageId, obj.name, obj.price / 100)
                                                     }>Add</button>
                                             </div>
