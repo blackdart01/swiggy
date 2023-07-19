@@ -1,78 +1,71 @@
 import React from 'react'
+import axios from "axios";
 import '../Styles/cart.css'
 import Navbar from '../Components/Navbar'
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { CartContext } from '../Components/cartContext';
+import { useNavigate } from 'react-router-dom';
 const Cart = () => {
 
     const [cartArr] = useContext(CartContext);
-    const [cartCount, setCartCount] = useState([])
-    const [itemCount, setItemCount] = useState({});
-
+    const [cart, setCart] = useState(null)
+   
     let subtotalAmt = 0;
     let gstAmt = 0;
     let totalAmt = 0;
-    cartArr.map(obj => {
-        subtotalAmt += obj.foodPriceObj;
-    })
-    gstAmt = subtotalAmt * 0.03;
-    totalAmt = subtotalAmt + gstAmt
+    useEffect(() => {
+        axios.get("http://localhost:8080/posts").then((response) => {
+        });
+    }, [])
 
-
-    const handleDecrement = (index) => {
-        const updatedCart = [...cartArr];
-        if (itemCount[index] > 0) {
-            updatedCart[index].foodQuantity -= 1;
-            setItemCount((prevCount) => ({
-                ...prevCount,
-                [index]: prevCount[index] - 1,
-            }));
+    const handleIncrement = async(index) => {
+        cartArr[index].quantity+=1;
+        // if (!cartArr[index].quantity) {
+        //     cartArr.splice(index, 1);
+        // }
+        setCart(cartArr[index].quantity);
+    }
+    const handleDecrement = async(index) => {
+        cartArr[index].quantity-=1;
+        if(!cartArr[index].quantity){
+            cartArr.splice(index, 1);
         }
-        setCartCount(updatedCart);
-    };
+        setCart(cartArr[index].quantity);
+    }
 
-    const handleIncrement = (index) => {
-        setCartCount((prevObj) => {
-            const existing = cartCount.find((obj) => obj.index === index);
-            if (existing) {
-                console.log(prevObj.map((obj) => obj.index === index ? { ...obj, count: obj.count + 1 } : obj));
-                return  prevObj.map((obj) => obj.index === index ? { ...obj, count: obj.count + 1 } : obj);
-            }
-            else{
-                const newObj={index:index,count:1};
-                console.log(newObj);
-                return [...prevObj, newObj];
-            }
-        })
-        console.log(cartCount);
+    const navigate = useNavigate();
+
+    const handleBackClick = (event) => {
+        navigate(-1);
     };
 
     return (
         <>
             <Navbar />
+                <button className="back-css" onClick={handleBackClick}>Back</button>
             <div className="cart">
                 {cartArr.map((obj, index) => {
+                    subtotalAmt+=obj.price * obj.quantity;
+                    gstAmt = subtotalAmt * 0.03;
+                    totalAmt = subtotalAmt + gstAmt
                     return (
                         <div className="cart-card" key={obj.id}>
                             <div className="cart-card-desc">
-                                <img src={`https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/${obj.imgIdObj}`} alt="" />
-                                <p className="cart-card-text">{obj.foodNameObj}</p>
+                                <img src={`https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/${obj.imageId}`} alt="" />
+                                <p className="cart-card-text">{obj.name}</p>
                             </div>
                             <div className="button">
                                 <div className="left-button">
                                     <button onClick={() => handleDecrement(index)}><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M5 11h14v2H5z"></path></svg></button>
                                 </div>
-                            {cartCount.map((obj, index) => {
                                 <div className="text-text">
-                                    <p className="text">{index}</p>
+                                    <p className="text">{obj.quantity}</p>
                                 </div>
-                                }
-                                )}
                                 <div className="right-button">
                                     <button onClick={() => handleIncrement(index)}><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M19 11h-6V5h-2v6H5v2h6v6h2v-6h6z"></path></svg></button>
                                 </div>
                             </div>
-                            <p className="price">₹{obj.foodPriceObj}</p>
+                            <p className="price">₹{obj.price * obj.quantity}</p>
                         </div>
                     )
                 })}

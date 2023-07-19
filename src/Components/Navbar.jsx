@@ -2,8 +2,6 @@ import React from 'react'
 import '../index.css'
 import '../Styles/Navbar.css'
 import {Link} from 'react-router-dom'
-import { useState, useEffect } from 'react'
-import axios from 'axios';
 
 const Navbar = () => {
 
@@ -42,14 +40,6 @@ const Navbar = () => {
                     </form>
 
                     <ul className="navbar-nav ms-auto">
-                        <li className="nav-item nav-item-css">
-                            <i className="fa-solid fa-magnifying-glass"></i>
-                            <a className="nav-link active" aria-current="page" href="#">Search</a>
-                        </li>
-                        <li className="nav-item nav-item-css">
-                            <i className="fa-regular fa-circle-question"></i
-                            ><a className="nav-link active" href="#">Offers</a>
-                        </li>
                         <li className="nav-item nav-item-css">
                             <i className="fa-regular fa-user"></i>
                             <Link className="nav-link active" to="/login">Sign In</Link>

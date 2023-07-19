@@ -9,8 +9,6 @@ const RestroMenu = () => {
   const [restroData, setRestroData] = useState(null);
   const [restroCouponData, setRestroCouponData] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [restroResObj, setRestroResObj] = useState([]);
-  const [totalOpenRestaurants, setTotalOpenRestaurants] = useState(0)
   const { id } = useParams();
   const getCard = async () => {
     try {
@@ -20,7 +18,6 @@ const RestroMenu = () => {
       const jsonData = await response.json();
       const res = jsonData.data.cards[0].card.card.info;
       let restroRes = jsonData.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards;
-      console.log(restroRes);
       if (restroRes[1].card.card.categories) {
         const a = restroRes[1].card.card.categories[0].itemCards;
         restroRes=a.map(obj=> obj.card.info)
@@ -35,7 +32,7 @@ const RestroMenu = () => {
       }
 
       const restroCouponRes = jsonData.data.cards[1].card.card.gridElements.infoWithStyle.offers;
-      const restroId = jsonData.data.id;
+      // const restroId = jsonData.data.id;
       setData(res);
       setRestroData(restroRes);
       setRestroCouponData(restroCouponRes);
@@ -44,21 +41,22 @@ const RestroMenu = () => {
       console.error('Error fetching data:', error);
     }
   }
-
-
-
-  useEffect(() => {
+  useEffect(()=>{
     getCard();
-  }, [])
-
-
+  },[])
 
   return (
     <>
       <Navbar />
       {isLoaded ? (
-        <Product isLoaded={isLoaded} data={data} restroData={restroData} restroCouponData={restroCouponData} restroId={id} />
-      ) : (<div>Loading Data</div>)}
+        <Product isLoaded={isLoaded} data={data} restroData={restroData} restroCouponData={restroCouponData} />
+      ) : (
+          <div class="d-flex justify-content-center" style={{position:"absolute", top:"50%", left:"50%", transform:"translate(-50%,-50%)"}} >
+            <div class="spinner-border" style={{ width: "3rem", height: "3rem" }} role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+      )}
 
     </>
   )
